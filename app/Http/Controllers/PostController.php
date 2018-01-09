@@ -26,7 +26,7 @@ class PostController extends Controller
         $user = User::find(1);
         $posts_2 = $user->posts()->get();
 
-        $posts_3 = Post::with('user')->get();
+//        $posts_3 = Post::with('user')->get();
 
         // all return is works
 //        return $posts; // --- JSON
@@ -35,7 +35,7 @@ class PostController extends Controller
         return view('posts.index', [
             'posts' => $posts,
             'posts_2' => $posts_2,
-            'posts_3' => $posts_3,
+//            'posts_3' => $posts_3,
             'authors' => $authors,
             'authors_2' => $authors_2
         ]);
@@ -49,14 +49,13 @@ class PostController extends Controller
      */
     public function create(Request  $request)
     {
-//        // ???? ???????????? ????? ??????????? ????? ??? ?????????????
 //        if($request->user()->can_post())
 //        {
             return view('posts.create');
 //        }
 //        else
 //        {
-//            return redirect('/')->withErrors('? ??? ??? ??????????? ???? ??? ????????? ?????');
+//            return redirect('/')->withErrors('Errors');
 //        }
     }
     

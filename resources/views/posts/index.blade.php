@@ -11,10 +11,13 @@
 @section('content')
     <p>Body</p>
     @foreach ($posts as $post)
-        <p>Id: {{ $post->id }}</p>
+        <p><h2>Id: {{ $post->id }}</h2></p>
         <p>Title: {{ $post->title }}</p>
         <p>Text: {{ $post->text }}</p>
-        <p>Author: {{ $post->user_id }}</p>
+        <p>Author: {{ $post->user['name'] }}</p>
+        {{--<p>Author: {{ $post->user_id }}</p>--}}
+{{--        <p>User: {{ $post->user }}</p>--}}
+        {{--<p>Post : {{var_dump($post)}}</p>--}}
     @endforeach
 
     {{--{{var_dump($authors)}}--}}
@@ -29,13 +32,14 @@
         <p>Author: {{ $post->user_id }}</p>
     @endforeach
 
-    <p><h2><i>Body 3 Post by user </i></h2></p>
-    @foreach ($posts_3 as $post)
-        <p>Id: {{ $post->id }}</p>
-        <p>Title: {{ $post->title }}</p>
-        <p>Text: {{ $post->text }}</p>
-        <p>Author: {{ $post->user->name }}</p>
-        {{--{{var_dump($post)}}--}}
-    @endforeach
+    {{--<p><h2><i>Body 3 Post by user </i></h2></p>--}}
+    {{--@foreach ($posts_3 as $post)--}}
+        {{--<p>Id: {{ $post->id }}</p>--}}
+        {{--<p>Title: {{ $post->title }}</p>--}}
+        {{--<p>Text: {{ $post->text }}</p>--}}
+        {{--<p>Author: {{ $post->user->name }}</p>--}}
+        {{--{{$post->user['name']}}--}}
+        {{--{{var_dump($post->user)}}--}}
+    {{--@endforeach--}}
 
 @endsection
