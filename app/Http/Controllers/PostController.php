@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Guard;
 
 class PostController extends Controller
 {
@@ -49,9 +51,20 @@ class PostController extends Controller
      */
     public function create(Request  $request)
     {
-//        if($request->user()->can_post())
-//        {
-            return view('posts.create');
+        $post = Post::class;
+        $categories = Category::all(['id','name'])->toArray();
+        $categories = array_map(function($temp){
+            return $temp['id'] = $temp['name'];
+        }, $categories);
+
+        
+//        $categories = \App\Category::class;
+//        return View::make('posts.create')->with('post', $post)->with('categories', $categories);
+        return view('posts.create',[
+            'post' => $post,
+            'categories' => $categories
+        ]);
+
 //        }
 //        else
 //        {
@@ -67,7 +80,23 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'text' => 'required|max:255'
+        ]);
+
+        $post = new Post();
+        
+        $post->setTitleAttribute($request->input('title'));
+        $post->text = $request->input('text');
+        $post->category_id = $request->input('category_id');
+        $post->user_id = \Auth::user()->id;
+
+        $post->save();
+
+        return response()->json([
+            'status' => 'ok',
+        ]);
     }
 
     /**

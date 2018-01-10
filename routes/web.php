@@ -14,10 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/posts/','PostController@index');
+
+Route::resource('posts', 'PostController');
+
 Route::get('/categories/','CategoryController@index');
 Route::get('/authors/','UserController@index');
+Auth::routes();
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth'] ], function () {
-    Route::get('/', 'DashboardController@dashboard')->name('admin.index');
-});
+Route::get('/home', 'HomeController@index')->name('home');
