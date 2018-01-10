@@ -14,11 +14,11 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
-            'name' => 'admin',
+            'name' => 'ROLE_ADMIN',
         ]);
         
         $role_employee = new Role();
-        $role_employee->name = 'user';
+        $role_employee->name = 'ROLE_USER';
         $role_employee->save();
 
     }
