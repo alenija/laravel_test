@@ -51,25 +51,17 @@ class PostController extends Controller
      */
     public function create(Request  $request)
     {
+        $categoriesToArray = [];
         $post = Post::class;
         $categories = Category::all(['id','name'])->toArray();
-        $categories = array_map(function($temp){
-            return $temp['id'] = $temp['name'];
-        }, $categories);
+        foreach ($categories as $category) {
+            $categoriesToArray[$category['id']] = $category['name'];
+        }
 
-        
-//        $categories = \App\Category::class;
-//        return View::make('posts.create')->with('post', $post)->with('categories', $categories);
         return view('posts.create',[
             'post' => $post,
-            'categories' => $categories
+            'categories' => $categoriesToArray
         ]);
-
-//        }
-//        else
-//        {
-//            return redirect('/')->withErrors('Errors');
-//        }
     }
     
     /**
