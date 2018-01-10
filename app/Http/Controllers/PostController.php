@@ -25,21 +25,14 @@ class PostController extends Controller
             ->take(10)
             ->get();
 
-        $user = User::find(1);
-        $posts_2 = $user->posts()->get();
-
-//        $posts_3 = Post::with('user')->get();
-
         // all return is works
 //        return $posts; // --- JSON
 //        return view('posts.index', compact('posts'));
 //        return view('posts.index')->with('posts', $posts);
         return view('posts.index', [
             'posts' => $posts,
-            'posts_2' => $posts_2,
-//            'posts_3' => $posts_3,
-            'authors' => $authors,
-            'authors_2' => $authors_2
+//            'authors' => $authors,
+//            'authors_2' => $authors_2
         ]);
     }
 
@@ -99,7 +92,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show')->with('post', $post);
     }
 
     /**
