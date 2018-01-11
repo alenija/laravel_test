@@ -26,9 +26,9 @@ class UsersTableSeeder extends Seeder
 
 
         factory(User::class, 50)->create()->each(function($user) {
-            $user->posts()->save(factory(Post::class)->make());
+//            $user->posts()->save(factory(Post::class)->make()); // create post from $user
 
-            $role_user = Role::where('name', 'user')->first();
+            $role_user = Role::where('name', 'ROLE_USER')->first();
             $user->roles()->attach($role_user);
         });
 

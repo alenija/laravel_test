@@ -7,15 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    /**
+     * Fillable fields
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'category_id',
+        'title',
+        'slug',
+        'text'
+    ];
+
     // get all comments for post
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    public function categories()
+    public function category()
     {
-        return $this->hasMany(Category::class);
+//        return $this->belongsToMany(Category::class, 'post_categories'); // for many to many
+        return $this->belongsTo(Category::class);
     }
 
     // get user

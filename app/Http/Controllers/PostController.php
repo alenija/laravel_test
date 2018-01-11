@@ -6,7 +6,7 @@ use App\User;
 use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Auth\Guard;
+use Session;
 
 class PostController extends Controller
 {
@@ -19,20 +19,11 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = Post::all();
-        $authors = User::all();
-        $authors_2 = User::where('name', 'Autor_2')
-            ->orderBy('name', 'desc')
-            ->take(10)
-            ->get();
 
         // all return is works
-//        return $posts; // --- JSON
-//        return view('posts.index', compact('posts'));
 //        return view('posts.index')->with('posts', $posts);
         return view('posts.index', [
             'posts' => $posts,
-//            'authors' => $authors,
-//            'authors_2' => $authors_2
         ]);
     }
 
@@ -79,9 +70,12 @@ class PostController extends Controller
 
         $post->save();
 
-        return response()->json([
-            'status' => 'ok',
-        ]);
+//        $input = $request->all();
+//        Post::create($input);
+
+        Session::flash('flash_message', 'Post successfully added!');
+
+        return redirect()->back();
     }
 
     /**
@@ -103,7 +97,18 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categoriesToArray = [];
+        $categories = Category::all(['id','name'])->toArray();
+        foreach ($categories as $category) {
+            $categoriesToArray[$category['id']] = $category['name'];
+        }
+
+        $post = Post::findOrFail($post->id);
+
+        return view('posts.edit',[
+            'post' => $post,
+            'categories' => $categoriesToArray
+        ]);
     }
 
     /**
@@ -115,7 +120,16 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post = Post::findOrFail($post->id);
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'text' => 'required|max:255'
+        ]);
+        $post->update($request->all());
+
+        Session::flash('flash_message', 'Post successfully updated!');
+        
+        return redirect('posts/'. $post->id);
     }
 
     /**
