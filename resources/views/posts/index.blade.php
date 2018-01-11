@@ -3,6 +3,13 @@
 @section('title', 'Page Posts')
 
 @section('content')
+
+    @if(Session::has('flash_message'))
+        <div class="alert alert-success">
+            {{ Session::get('flash_message') }}
+        </div>
+    @endif
+
     <p><h1>All posts</h1></p>
     @foreach ($posts as $post)
         <p><h2>Id: {{ $post['id'] }}</h2></p>

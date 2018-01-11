@@ -18,11 +18,23 @@
     <p>Category: {{ $post->category['name'] }}</p>
     <p>Text: {{ $post->text }}</p>
     <p>Author: <i>{{ $post->user['name'] }}</i></p>
-    @if (auth()->check())
-        @if (auth()->user()->isAdmin())
-            {{--<a href="{{ route('posts.edit', ['post' => $post]) }}">Edit </a>--}}
-            <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
-            <a href="{{ route('posts.destroy', ['post' => $post]) }}">Remove</a>
-        @endif
-     @endif
+    <div class="row">
+        <div class="col-md-6">
+            @if (auth()->check())
+                @if (auth()->user()->isAdmin())
+                    {{--<a href="{{ route('posts.edit', ['post' => $post]) }}">Edit </a>--}}
+                    <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-primary">Edit</a>
+                    {{--<a href="{{ route('posts.destroy', ['post' => $post]) }}">Remove</a>--}}
+                    <div class="col-md-6 text-right">
+                        {!! Form::open([
+                            'method' => 'DELETE',
+                            'route' => ['posts.destroy', $post]
+                        ]) !!}
+                        {!! Form::submit('Delete this post?', ['class' => 'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+                    </div>
+                @endif
+            @endif
+        </div>
+    </div>
  @endsection

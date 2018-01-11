@@ -125,6 +125,8 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'text' => 'required|max:255'
         ]);
+        // The update method, like the insert method, accepts an array of column and value pairs containing the columns to be updated
+        // (mass assignable)
         $post->update($request->all());
 
         Session::flash('flash_message', 'Post successfully updated!');
@@ -140,6 +142,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post = Post::findOrFail($post->id);
+        $post->delete();
+
+        Session::flash('flash_message', 'Post successfully deleted!');
+
+        return redirect()->route('posts.index');
     }
 }
