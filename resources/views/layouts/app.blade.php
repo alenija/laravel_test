@@ -31,6 +31,19 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+
+                    <a class="navbar-brand" href="{{ url('/posts') }}">
+                        Posts
+                    </a>
+
+                    @if (auth()->check())
+                        @if (auth()->user()->isAdmin())
+                            <a class="navbar-brand" href="{{ url('/posts/create') }}">
+                                Create post
+                            </a>
+                        @endif
+                    @endif
+
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
