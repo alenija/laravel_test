@@ -6,13 +6,20 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
-{
+{    
+    public function __construct($params = [])
+    {
+        parent::__construct($params); // Calls Default Constructor
+        $this->attributes['user_id'] = \Auth::user()->id ?? null;
+    }
+    
     /**
      * Fillable fields
      *
      * @var array
      */
-    protected $fillable = [
+    protected $fillable = [ // attributes to which you can directly contact
+        'user_id',
         'category_id',
         'title',
         'slug',
@@ -36,6 +43,11 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     *  Readers and Converters
+     *
+     */
 
     public function setTitleAttribute($value)
     {

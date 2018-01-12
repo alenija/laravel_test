@@ -61,17 +61,18 @@ class PostController extends Controller
             'text' => 'required|max:255'
         ]);
 
-        $post = new Post();
-        
-        $post->setTitleAttribute($request->input('title'));
-        $post->text = $request->input('text');
-        $post->category_id = $request->input('category_id');
-        $post->user_id = \Auth::user()->id;
+//        $post = new Post();
+//
+//        $post->setTitleAttribute($request->input('title'));
+//        $post->text = $request->input('text');
+//        $post->category_id = $request->input('category_id');
+//        $post->user_id = \Auth::user()->id;
+//
+//        $post->save();
 
-        $post->save();
-
-//        $input = $request->all();
-//        Post::create($input);
+        $input = $request->all();
+//        $input['user_id'] = \Auth::user()->id;
+        Post::create($input);
 
         Session::flash('flash_message', 'Post successfully added!');
 
