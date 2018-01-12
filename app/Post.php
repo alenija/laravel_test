@@ -45,8 +45,7 @@ class Post extends Model
     }
 
     /**
-     *  Readers and Converters
-     *
+     *  Converter
      */
 
     public function setTitleAttribute($value)
