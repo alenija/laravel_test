@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('posts', 'PostController');
+Route::resource('comments', 'CommentController');
 
 Route::get('/categories/','CategoryController@index');
 Route::get('/authors/','UserController@index');

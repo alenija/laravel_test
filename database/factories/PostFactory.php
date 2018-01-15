@@ -17,8 +17,8 @@ $factory->define(App\Post::class, function (Faker $faker) {
     $title = $faker->sentence(5);
     $slug = str_slug($title);
     return [
-        'user_id' => random_int(1,100),
-        'category_id' => random_int(1,2),
+        'user_id' => random_int(1,50),
+        'category_id' => random_int(1,5),
         'slug' => $slug,
         'title' => $title,
         'text' => $faker->text(100),

@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {    
-    public function __construct($params = [])
-    {
-        parent::__construct($params); // Calls Default Constructor
-        $this->attributes['user_id'] = \Auth::user()->id ?? null;
-    }
+//    public function __construct($params = [])
+//    {
+//        parent::__construct($params); // Calls Default Constructor
+//        $this->attributes['user_id'] = \Auth::user()->id ?? null; // with this don`t work PostsTableSeeder
+//    }
     
     /**
      * Fillable fields

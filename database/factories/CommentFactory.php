@@ -16,8 +16,8 @@ use Faker\Generator as Faker;
 $factory->define(App\Comment::class, function (Faker $faker) {
 
     return [
-        'user_id' => random_int(1,100),
-        'post_id' => random_int(1,50),
+        'user_id' => random_int(1,50),
+        'post_id' => random_int(1,10),
         'text' => $faker->text(50),
         'created_at' => $faker->date(),
         'updated_at' => $faker->date()
