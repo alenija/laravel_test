@@ -6,12 +6,15 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
-{    
-//    public function __construct($params = [])
-//    {
-//        parent::__construct($params); // Calls Default Constructor
-//        $this->attributes['user_id'] = \Auth::user()->id ?? null; // with this don`t work PostsTableSeeder
-//    }
+{
+    public $userId = null;
+
+    public function __construct($params = [])
+    {
+        parent::__construct($params); // Calls Default Constructor
+//        $this->attributes['user_id'] = \Auth::user()->id ?? null;
+        $this->userId =  \Auth::user()->id ?? null;
+    }
     
     /**
      * Fillable fields
@@ -54,6 +57,14 @@ class Post extends Model
 
         if (! $this->exists) {
             $this->attributes['slug'] = str_slug($value);
+        }
+    }
+
+
+    public function setUserId()
+    {
+        if (! is_null($this->userId)) {
+            $this->attributes['user_id'] =  $this->userId;
         }
     }
 }
