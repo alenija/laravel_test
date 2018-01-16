@@ -12,3 +12,4 @@ yarn-error.log
 .env
 access.log
 error.log
+_ide_helper.php
