@@ -13,7 +13,8 @@ class Post extends Model
     {
         parent::__construct($params); // Calls Default Constructor
 //        $this->attributes['user_id'] = \Auth::user()->id ?? null;
-        $this->userId =  \Auth::user()->id ?? null;
+        $this->userId = \Auth::user()->id ?? null;
+        $this->setUserId();
     }
     
     /**
