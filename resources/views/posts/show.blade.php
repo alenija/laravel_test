@@ -37,4 +37,12 @@
             @endif
         </div>
     </div>
+    <p><h1>Comments:</h1></p>
+    @foreach ($post['comments'] as $comment)
+        <p><h2>Id: {{ $comment['id'] }}</h2></p>
+        <p>Text: {{ $comment['text'] }}</p>
+        <p>Author: {{ $comment->user['name'] }}</p>
+{{--        <p>Data: {{ $comment['created_at'] }}</p>--}}
+        <p>Data: {{ Carbon\Carbon::parse($comment['created_at'])->format('d-m-Y h:i') }}</p>
+    @endforeach
  @endsection
