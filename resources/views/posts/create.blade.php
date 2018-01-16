@@ -27,11 +27,11 @@
     </div>
     <div class="form-group">
         {!! Form::label('title', 'Title:') !!}
-        {!! Form::text('title') !!}
+        {!! Form::text('title', null, ['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('text', 'Text:') !!}
-        {!! Form::textarea('text') !!}
+        {!! Form::textarea('text', null, ['class'=>'form-control', 'id'=>'text', 'rows'=>'15']) !!}
     </div>
     {!! Form::submit('Send',  ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
