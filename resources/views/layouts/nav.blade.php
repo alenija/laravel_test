@@ -21,35 +21,30 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                &nbsp;
-            </ul>
-
-            <a class="navbar-brand" href="{{ url('/posts') }}">
-                Posts
-            </a>
-
-            @if (auth()->check())
-                @if (auth()->user()->isAdmin())
-                    <a class="navbar-brand" href="{{ url('/posts/create') }}">
-                        Create post
+                <li><a class="navbar-brand" href="{{ url('/posts') }}">
+                        Posts
                     </a>
+                </li>
+                @if (auth()->check())
+                    @if (auth()->user()->isAdmin())
+                        <li><a class="navbar-brand" href="{{ url('/posts/create') }}">
+                                Create post
+                            </a>
+                        </li>
+                    @endif
                 @endif
-            @endif
-
-            <a class="navbar-brand" href="{{ url('about') }}">
-                About
-            </a>
-
-            <div class="dropdown">
-                <a class="navbar-brand dropdown-toggle"  data-toggle="dropdown" href="">
-                    Category
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">HTML</a></li>
-                    <li><a href="#">CSS</a></li>
-                    <li><a href="#">JavaScript</a></li>
-                </ul>
-            </div>
+                <li class="dropdown">
+                    <a id="drop1" href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown">
+                        Category
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">HTML</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                    </ul>
+                </li>
+            </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
