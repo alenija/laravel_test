@@ -13,3 +13,4 @@ yarn-error.log
 access.log
 error.log
 _ide_helper.php
+composer.lock
