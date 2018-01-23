@@ -1,0 +1,10 @@
+.dropup .dropdown-submenu > .dropdown-menu{
+    bottom: auto;
+    margin-bottom: 2px;
+}
+
+@media (min-width: 767px) {
+    .navbar-nav .dropdown-menu .caret {
+        transform: rotate(-90deg);
+    }
+}

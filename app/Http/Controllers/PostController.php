@@ -70,9 +70,9 @@ class PostController extends Controller
 //
 //        $post->save();
 
-        $input = $request->all();
+//        $input = $request->all();
 //        $input['user_id'] = \Auth::user()->id;
-        Post::create($input);
+        Post::create($request->all());
 
         Session::flash('flash_message', 'Post successfully added!');
 

@@ -19,31 +19,16 @@
 
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
+
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a class="navbar-brand" href="{{ url('/posts') }}">
-                        Posts
-                    </a>
-                </li>
-                @if (auth()->check())
-                    @if (auth()->user()->isAdmin())
-                        <li><a class="navbar-brand" href="{{ url('/posts/create') }}">
-                                Create post
-                            </a>
-                        </li>
-                    @endif
+                @if(isset($MainMenu))
+                    @include(config('laravel-menu.views.bootstrap-items'), ['items' => $MainMenu->roots()])
                 @endif
-                <li class="dropdown">
-                    <a id="drop1" href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown">
-                        Category
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">HTML</a></li>
-                        <li><a href="#">CSS</a></li>
-                        <li><a href="#">JavaScript</a></li>
-                    </ul>
-                </li>
+
+                @if(isset($CategoryMenu))
+                    @include(config('laravel-menu.views.bootstrap-items'), ['items' => $CategoryMenu->roots()])
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->

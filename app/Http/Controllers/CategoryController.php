@@ -14,8 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::withCount('posts')->get();;
-        return view('categories.index', compact('categories'));
+        $categories = Category::all();
+        
+        return $categories;
+//        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -42,21 +44,25 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Categories  $categoies
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Categories $categoies)
+    public function show(Category $category)
     {
-        //
+        $posts = $category->posts()->get();
+
+        return view('posts.index', [
+            'posts' => $posts,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Categories  $categoies
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categories $categoies)
+    public function edit(Category $category)
     {
         //
     }
@@ -65,10 +71,10 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Categoies  $categoies
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoies $categoies)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -76,10 +82,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Categoies  $categoies
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoies $categoies)
+    public function destroy(Category $category)
     {
         //
     }

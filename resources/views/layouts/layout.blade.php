@@ -15,20 +15,20 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+<div id="app">
 
-        @include('partials.nav')
+    @include('partials.nav')
 
-        <div class="container">
-            @yield('content')
-        </div>
-
+    <div class="container">
+        @yield('content')
     </div>
 
-    @include('partials.footer')
+</div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/menu.js') }}"></script>
+@include('partials.footer')
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/menu.js') }}"></script>
 </body>
 </html>
