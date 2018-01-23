@@ -31,6 +31,4 @@ class MenuMiddleware
 
         return $next($request);
     }
-    
-//    private function 
 }
