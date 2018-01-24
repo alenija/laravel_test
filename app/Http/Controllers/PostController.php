@@ -31,15 +31,17 @@ class PostController extends Controller
      * Show the form for creating a new resource.
      *
      * @param  Request  $request
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function create(Request  $request)
+    public function create(Request  $request, Category $category)
     {
         $categoriesToArray = [];
         $post = Post::class;
-        $categories = Category::all(['id','name'])->toArray();
-        foreach ($categories as $category) {
-            $categoriesToArray[$category['id']] = $category['name'];
+        // get categories without children
+        $categories = $category->has('children', '=', 0)->get()->toArray();
+        foreach ($categories as $cat) {
+            $categoriesToArray[$cat['id']] = $cat['name'];
         }
 
         return view('posts.create',[
