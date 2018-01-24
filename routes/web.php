@@ -19,7 +19,7 @@ Route::get('about', function () {
     return view('about');
 });
 
-Route::resource('posts', 'PostController');
+Route::resource('posts', 'PostController', ['middleware' => 'auth']);
 Route::resource('comments', 'CommentController');
 
 //Route::get('categories','CategoryController@index');

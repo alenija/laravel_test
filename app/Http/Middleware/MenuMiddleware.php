@@ -3,12 +3,17 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Category;
-use App\Post;
-use App\Http\Controllers\CategoryController;
+use Illuminate\Contracts\Auth\Guard;
 
 class MenuMiddleware
 {
+    protected $auth;
+
+    public function __construct(Guard $auth)
+    {
+        $this->auth = $auth;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -21,7 +26,10 @@ class MenuMiddleware
         \Menu::make('MainMenu', function ($menu) {
             $menu->add('About',        ['url'  => 'about']);
             $menu->add('Posts',        ['url'  => 'posts']);
-            $menu->add('Post create ', ['url'  => 'posts/create ']);
+//            if ($this->auth->user()->check()) {
+            if ($this->auth->user() && $this->auth->user()->isAdmin()) {
+                $menu->add('Post create ', ['url' => 'posts/create ']);
+            }
         });
 
         \Menu::make('CategoryMenu', function ($menu) {

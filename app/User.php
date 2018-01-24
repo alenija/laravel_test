@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Comment;
-use App\Post;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
