@@ -1,4 +1,4 @@
-<footer class="text-muted">
+<footer class="panel-footer">
     <br>
     <div class="container">
         <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
