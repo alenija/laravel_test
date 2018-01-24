@@ -24,7 +24,9 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        return view('comments.create',[
+            'post' => Comment::class,
+        ]);
     }
 
     /**

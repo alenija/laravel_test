@@ -37,6 +37,17 @@
             @endif
         </div>
     </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-6">
+            @if (auth()->check())
+                <a href="{{ route('comments.create', ['post' => $post]) }}" class="btn btn-block btn-success"> <i class="fa fa-quote-left pull-left fa-border"></i> Create comments <i class="fa fa-quote-left pull-right fa-border"></i> </a>
+            @endif
+        </div>
+    </div>
+
     <p><h1>Comments:</h1></p>
     @foreach ($post['comments'] as $comment)
         <p><h2>Id: {{ $comment['id'] }}</h2></p>
