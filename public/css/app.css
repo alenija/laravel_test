@@ -5806,8 +5806,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 
-    position: fixed; /* ????????????? ????????? */
-    left: 0; bottom: 0; /* ????? ?????? ???? */
+    /*position: fixed;*/
+    /*left: 0; bottom: 0;*/
 }
 
 .panel > .list-group, .panel > .panel-collapse > .list-group {

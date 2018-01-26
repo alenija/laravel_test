@@ -18,6 +18,8 @@
         </div>
     @endif
 
+    <label> Comment from: </label> {{ Auth::user()->name }}
+
     {!! Form::open([
         'route' => 'comments.store',
         'method' => 'post']) !!}

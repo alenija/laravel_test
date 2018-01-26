@@ -72,13 +72,13 @@ class PostController extends Controller
 //
 //        $post->save();
 
-//        $input = $request->all();
-//        $input['user_id'] = \Auth::user()->id;
-        Post::create($request->all());
+        $input = $request->all();
+        $input['user_id'] = \Auth::user()->id;
+        $model = Post::create($input);
 
         Session::flash('flash_message', 'Post successfully added!');
 
-        return redirect()->back();
+        return redirect('posts/'. $model->id);
     }
 
     /**

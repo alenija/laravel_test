@@ -13,7 +13,25 @@ class Comment extends Model
      *
      * @var array
      */
-    protected $guarded = [];
+//    protected $guarded = [];
+
+    protected $fillable = [ // attributes to which you can directly contact
+        'user_id',
+        'post_id',
+        'parent_id',
+        'text'
+    ];
+
+    protected $userId;
+
+    public function __construct($params = [])
+    {
+        parent::__construct($params);
+
+        $this->userId = \Auth::user()->id;
+        $this->setUserIdAttribute($this->userId);
+    }
+
     // get user
     public function user()
     {
@@ -33,5 +51,12 @@ class Comment extends Model
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function setUserIdAttribute($userId)
+    {
+        if (isset($userId)) {
+            $this->attributes['user_id'] = $userId;
+        }
     }
 }

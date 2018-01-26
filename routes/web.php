@@ -20,7 +20,9 @@ Route::get('about', function () {
 });
 
 Route::resource('posts', 'PostController', ['middleware' => 'auth']);
+
 Route::resource('comments', 'CommentController');
+Route::post('/posts/{post}/comments', 'CommentController@store');
 
 //Route::get('categories','CategoryController@index');
 Route::resource('categories','CategoryController');

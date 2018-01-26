@@ -38,15 +38,7 @@
         </div>
     </div>
 
-    <br>
-
-    <div class="row">
-        <div class="col-md-6">
-            @if (auth()->check())
-                <a href="{{ route('comments.create', ['post' => $post]) }}" class="btn btn-block btn-success"> <i class="fa fa-quote-left pull-left fa-border"></i> Create comments <i class="fa fa-quote-left pull-right fa-border"></i> </a>
-            @endif
-        </div>
-    </div>
+    {{-- Output comments--}}
 
     <p><h1>Comments:</h1></p>
     @foreach ($post['comments'] as $comment)
@@ -54,6 +46,41 @@
         <p>Text: {{ $comment['text'] }}</p>
         <p>Author: {{ $comment->user['name'] }}</p>
 {{--        <p>Data: {{ $comment['created_at'] }}</p>--}}
-        <p>Data: {{ Carbon\Carbon::parse($comment['created_at'])->format('d-m-Y h:i') }}</p>
+        {{--<p>Data: {{ Carbon\Carbon::parse($comment['created_at'])->format('d-m-Y h:i') }}</p>--}}
+        <p>Data: {{  $comment->created_at->diffForHumans() }}</p> {{-- ... ago --}}
     @endforeach
+
+    {{-- Add comment--}}
+
+    @if (auth()->check())
+        <div class="row">
+            <div class="col-md-6">
+                <hr>
+                <div class="card">
+                    <div class="card-block">
+
+                        <label> Comment from: </label> {{ Auth::user()->name }}
+
+                        {!! Form::open([
+                            'url' => 'posts/' . $post->id . '/comments']) !!}
+
+                        <div class="form-group">
+                            {!! Form::textarea('text', null, ['class'=>'form-control', 'id'=>'text', 'rows'=>'5', 'placeholder'=>'Your comment']) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {{ Form::button('<i class="fa fa-quote-left pull-left fa-border"></i> Add comments <i class="fa fa-quote-left pull-right fa-border"></i>', ['class' => 'btn btn-block btn-success', 'type' => 'submit']) }}
+                        </div>
+
+                        {!! Form::close() !!}
+
+                        @include('partials.errors')
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    @endif
+
  @endsection

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Post;
 use Illuminate\Http\Request;
+use Session;
 
 class CommentController extends Controller
 {
@@ -24,20 +26,28 @@ class CommentController extends Controller
      */
     public function create()
     {
-        return view('comments.create',[
-            'post' => Comment::class,
-        ]);
+        return view('comments.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
-        //
+        $this->validate($request, [
+            'text' => 'required|max:255|min:5'
+        ]);
+
+        // add a comment to a post
+        $post->addComment(request('text'));
+
+        Session::flash('flash_message', 'Comment successfully added!');
+
+        return back();
     }
 
     /**

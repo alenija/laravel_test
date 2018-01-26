@@ -16,7 +16,7 @@ class AddParentIdToCommentsTable extends Migration
         if (Schema::hasTable('comments')) {
             if (!Schema::hasColumn('comments', 'parent_id')) {
                 Schema::table('comments', function (Blueprint $table) {
-                    $table->integer('parent_id')->unsigned()->index();
+                    $table->integer('parent_id')->unsigned()->default(0);
                 });
             }
         }

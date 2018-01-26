@@ -7,15 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    public function __construct($params = [])
-    {
-        parent::__construct($params); // Calls Default Constructor
-//        $this->attributes['user_id'] = \Auth::user()->id ?? null;
-//        $this->userId = \Auth::user()->id ?? null;
-        if (isset(\Auth::user()->id)) {
-            $this->attributes['user_id'] = \Auth::user()->id;
-        }
-    }
     
     /**
      * Fillable fields
@@ -23,6 +14,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [ // attributes to which you can directly contact
+        'id',
         'user_id',
         'category_id',
         'title',
@@ -59,5 +51,12 @@ class Post extends Model
         if (! $this->exists) {
             $this->attributes['slug'] = str_slug($value);
         }
+    }
+    
+    public function addComment($text)
+    {
+        $this->comments()->create([
+            'text' => $text,
+        ]);
     }
 }
